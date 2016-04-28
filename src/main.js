@@ -3,6 +3,7 @@ import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
 import List from './views/List'
 import Login from './views/login'
+import User from './views/user'
 import filters from './filters'
 import FastClick from 'fastclick'
 
@@ -46,6 +47,10 @@ router.map({
   '/login':{
   	name: 'login',
   	component: Login
+  },
+  '/user':{
+    name: 'user',
+    component: User
   }
  
 })

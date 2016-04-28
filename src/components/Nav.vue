@@ -35,7 +35,7 @@
 			},
 			toggleMan () {
 				this.showDownMenu()
-				if(!!localStorage.userName){
+				if(!!localStorage.loginName){
 					this.$route.router.go({name:'user',params: { username: localStorage.username }})
 				}else{
 					this.$route.router.go({name:'login',params: { redirect: encodeURIComponent(this.$route.path)}})
