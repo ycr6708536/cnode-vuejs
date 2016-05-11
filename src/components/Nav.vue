@@ -13,6 +13,7 @@
 			<li v-link="{ name: 'list', query: { tab: 'share'}}"><i class="fa fa-large fa-share fa-fw"></i><span>分享</span></li>
 			<li v-link="{ name: 'list', query: { tab: 'ask'}}"><i class="fa fa-large fa-weixin fa-fw"></i><span>问答</span></li>
 			<li v-link="{ name: 'list', query: { tab: 'job'}}"><i class="fa fa-large fa-users fa-fw"></i><span>招聘</span></li>
+			<li v-if="userId" v-link="{ name: 'add'}"><i class="fa fa-large fa-plus fa-fw"></i><span>添加</span></li>
 			<li @click="toggleMan"><i class="fa fa-large fa-user fa-fw"></i><span>个人</span></li>
 		</ul>
 	</div>
@@ -26,7 +27,8 @@
 	  el: '.nav',
 	  data () {
 			return {
-				showMenu: false
+				showMenu: false,
+				userId:localStorage.userId 
 			}
 		},
 		methods: {
@@ -35,10 +37,10 @@
 			},
 			toggleMan () {
 				this.showDownMenu()
-				if(!!localStorage.loginName){
-					this.$route.router.go({name:'user',params: { username: localStorage.username }})
+				if(!!localStorage.loginname){
+					this.$route.router.go({name:'user',params:{loginname:localStorage.loginname}});
 				}else{
-					this.$route.router.go({name:'login',params: { redirect: encodeURIComponent(this.$route.path)}})
+					this.$route.router.go({name:'login', params: { redirect: encodeURIComponent(this.$route.path)}})
 				}
 			}
 	  }

@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import List from './views/List'
 import Login from './views/login'
 import User from './views/user'
+import Topic from './views/topics'
+import Add from './views/add'
 import filters from './filters'
 import FastClick from 'fastclick'
 
@@ -40,6 +42,10 @@ router.beforeEach(transition => {
 })
 
 router.map({
+	'/':{
+		name: 'list',
+    component: List
+	},
   '/list': {
   	name: 'list',
     component: List
@@ -48,10 +54,22 @@ router.map({
   	name: 'login',
   	component: Login
   },
-  '/user':{
+  '/user/:loginname':{
     name: 'user',
-    component: User
+    component: User,
+    auth: true
+  },
+  '/topic/:id':{
+    name: 'topic',
+    component: Topic,
+    auth: true
+  },
+  '/add':{
+  	name:'add',
+  	component: Add,
+  	auth: true
   }
+ 
  
 })
 

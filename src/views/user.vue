@@ -11,7 +11,7 @@
   <section class="topics">
     <ul class="t-nav">
       <li class="br" :class='{"selected":selectItem === 1}' @click='changeItem(1)'>最近回复</li>
-      <li :class='{"selected":selectItem === 2}' @click='changeItem(2)'>最新发布</li>
+      <li  :class='{"selected":selectItem === 2}'  @click='changeItem(2)'>最新发布</li>
     </ul>
     <div class="message" v-for="item in currentData">
       <section class="user">
@@ -37,23 +37,22 @@
 
 <script type="text/javascript">
   import navCon from '../components/Nav'
-  //import myAlert from '../components/myAlert'
 
   export default {
     data (){
       return {
         user: {},
         currentData:[],
-        selectItem: 1//1最近回复，2最新发布
+        selectItem: 1
       }
     },
     route: {
       data (transition){
         let _this = this;
-        let loginName = transition.to.params.loginname;
+        let loginname = transition.to.params.loginname;
 
-        $.get('/api/v1/user/'+loginName,function(data){
-          id(data && data.data){
+        $.get('/api/v1/user/'+loginname,function(data){
+          if(data && data.data){
             let d = data.data;
             _this.user = d;
             if(d.recent_replies.length >0){
@@ -68,8 +67,9 @@
     },
     methods: {
       changeItem (idx){
+        console.log(idx)
         this.selectItem = idx;
-        this.currentData = idx ===1 ? this.user.recent_replies:this.user.recent_topics;
+        this.currentData = (idx ===1 ? this.user.recent_replies:this.user.recent_topics);
       }
     },
     components: {
@@ -79,21 +79,22 @@
 </script>
 
 <style type="text/css">
+  @import '../assets/iconfont/iconfont.css';
   .userInfo{
     margin-top: 50px;
     width: 100%;
     background-color: #fff;
     text-align: center;
     height: 180px;
-    box-shadow: 0px 5px 5px #888888;
+    background-color: #e7e7e7;
   }
   .userPic{
     display: block;
     width: 100px;
     height: 100px;
-    margin-top: 15px;
+    margin: 15px auto 0 auto;
     border: 1px solid #F3F3F3;
-    border-radius: 10px;
+    border-radius: 50%;
   }
   .userName{
     color: #000;
@@ -107,19 +108,17 @@
     width: 50%;
     float: left;
     padding-left: 10px;
+    box-sizing:border-box;
   }
   .userScore{
     width: 50%;
-    float: right;
+    float: left;
+    text-align: right;
     padding-right: 10px;
-    color: color: #80bd01;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    color: #333;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    word-wrap: break-word;
+    color: #80bd01;
+    box-sizing:border-box;
+  }
+  .topics{
   }
   .t-nav{
     width: 100%;
@@ -127,14 +126,16 @@
     list-style: none;
     border-bottom: solid 1px #d4d4d4;
     position: relative;
+    box-sizing:border-box;
   }
   .t-nav li{
     width: 50%;
-    padding: 12.5px 0;
+    padding: 7.5px 0;
     float: left;
-    font-size: 16;
+    font-size: 16px;
     text-align: center;
     font-weight: bold;
+    box-sizing:border-box;
   }
   .br{
     border-right: solid 1px #d4d4d4;
@@ -143,10 +144,13 @@
     color: #ff5a5f;
     border-bottom: solid 2px #ff5a5f;
   }
-  .message{
-    background-color: #fff;
-    padding: 5px;
-    border-bottom: solid 1px #d4d4d4;
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
   }
   .no-data{
     width: 100%;
@@ -157,17 +161,52 @@
     font-size: 18px;
     text-align: center;
   }
-  .iconfont{
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: 0.2px;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  .icon-empty{
+  .icon-empty {
     font-size: 125px;
     color: #d4d4d4;
     display: block;
+    box-sizing:border-box;
   }
+  .t-title{
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+  }
+  .head{
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border: 2px solid #fff6e6;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .cl{
+    float: left;
+    width: 70%;
+  }
+  .cr{
+    float: left;
+    width: 30%;
+    text-align: right;
+  }
+  .cl .name{
+    display: block;
+    color: #626262;
+  }
+  .cr .name{
+    display: block;
+    margin-top: 10px;
+    color: #80bd01;
+    font-size: 12px;
+  }
+  .info{
+    display: block;
+    flex: 1;
+    box-sizing: border-box;
+  }
+  .user{
+    display: flex;
+    padding: 10px;
+  }
+
 </style>

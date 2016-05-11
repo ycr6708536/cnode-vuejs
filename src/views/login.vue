@@ -57,7 +57,7 @@
 					type:'post',
 					dataType: 'json',
 					success: function(data){
-						localStorage.loginName = data.loginname;
+						localStorage.loginname = data.loginname;
 						localStorage.avatar_url = data.avatar_url;
 						localStorage.userId = data.id;
 						localStorage.token = self.token;

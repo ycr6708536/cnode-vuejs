@@ -1,7 +1,7 @@
 <template>
 	<nav-con :page-type="searchKey.tab | getTitleStr" ></nav-con>
 	<ul class="post-list" >
-		<li v-for="item in items" v-llink="{name: 'topic',params: {id: item.id}}">
+		<li v-for="item in items" v-link="{name: 'topic',params: {id: item.id}}">
 			<h3 v-text="item.title" 
 					:class="item.tab | getTabClassName item.good item.top"
 					:title="item.tab | getTabStr item.good item.top"></h3>
